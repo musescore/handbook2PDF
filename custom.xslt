@@ -36,7 +36,6 @@
         </style>
       </head>
       <body>
-        <h1>Table of Contents</h1>
         <ul><xsl:apply-templates select="outline:item/outline:item"/></ul>
       </body>
     </html>
