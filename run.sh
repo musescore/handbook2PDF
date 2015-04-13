@@ -20,7 +20,7 @@ do
     NID=${NIDS[$INDEX]}
     echo "update handbook $LANGUAGE"
     PDFILE=MuseScore-${LANGUAGE}.pdf
-    $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 2.0 handbook" cover https://musescore.org/en/handbook-cover toc --xsl-style-sheet custom.xslt https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf $PDFILE > /dev/null 2>&1
+    $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 2.0 handbook" cover https://musescore.org/${LANGUAGE}/handbook-cover toc --xsl-style-sheet custom.xslt https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf $PDFILE > /dev/null 2>&1
     scp $PDFILE musescore@ftp.osuosl.org:~/data/handbook/MuseScore-2.0/
     ssh musescore@ftp.osuosl.org "~/trigger-musescore"
     rm $PDFILE
