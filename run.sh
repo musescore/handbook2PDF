@@ -8,8 +8,8 @@ cd $ABSPATH
 WKHTML=/usr/local/bin/wkhtmltopdf
 
 #list of languages and nodes
-LANGUAGES=( en de)
-NIDS=( 36546 55116)
+LANGUAGES=( en de ja )
+NIDS=( 36546 55116 55261 )
 
 LANGUAGE_COUNT=${#LANGUAGES[@]}
 INDEX=0
