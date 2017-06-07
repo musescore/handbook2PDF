@@ -1,0 +1,16 @@
+language: python
+
+addons:
+  apt:
+    packages:
+      - zlib1g
+      - libfreetype6
+      - libfontconfig1
+      - wget
+      - expect
+      - language-pack-zh-hant
+      - ttf-wqy-microhei
+      - ttf-wqy-zenhei
+
+install: ./install.sh
+script: ./run.sh
