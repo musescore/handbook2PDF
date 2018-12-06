@@ -9,6 +9,7 @@ WKHTML=./wkhtmltox/bin/wkhtmltopdf
 
 LANGUAGES=( en af de ar be bg ca cs da et el es eo fa eu fr gl ko sr hr id it he lt hu nl ja nb pl pt-br pt-pt ro ru sk sl fi sv vi tr uk zh-hans zh-hant )
 NID=36546
+NID3=278625
 
 LANGUAGE_COUNT=${#LANGUAGES[@]}
 INDEX=0
@@ -36,15 +37,30 @@ expect << EOF
 EOF
 SSH_INDENTITY=$HOME/.ssh/osuosl_nighlies_rsa
 
+# MuseScore 2
 while [ "$INDEX" -lt "$LANGUAGE_COUNT" ]
 do
     LANGUAGE=${LANGUAGES[$INDEX]}
-    echo "update handbook $LANGUAGE"
+    echo "update handbook 2 - [$LANGUAGE]"
     PDFILE=MuseScore-${LANGUAGE}.pdf
     TIME=$(date +%s)
     #echo "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf&no-cache=${TIME}"
-    $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 2.0 handbook" cover https://musescore.org/${LANGUAGE}/handbook-cover toc --xsl-style-sheet custom.xslt "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf=1&no-cache=${TIME}" $PDFILE > /dev/null 2>&1
+    $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 2 handbook" cover https://musescore.org/${LANGUAGE}/handbook-cover toc --xsl-style-sheet custom.xslt "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf=1&no-cache=${TIME}" $PDFILE > /dev/null 2>&1
     scp -C -i $SSH_INDENTITY $PDFILE musescore-nightlies@ftp-osl.osuosl.org:~/ftp/handbook/MuseScore-2.0/
+    rm $PDFILE
+    ((INDEX++))
+done
+
+# MuseScore 3
+while [ "$INDEX" -lt "$LANGUAGE_COUNT" ]
+do
+    LANGUAGE=${LANGUAGES[$INDEX]}
+    echo "update handbook 3 - [$LANGUAGE]"
+    PDFILE=MuseScore-${LANGUAGE}.pdf
+    TIME=$(date +%s)
+    #echo "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID3}?pdf&no-cache=${TIME}"
+    $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 3 handbook" cover https://musescore.org/${LANGUAGE}/handbook-cover toc --xsl-style-sheet custom.xslt "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID3}?pdf=1&no-cache=${TIME}" $PDFILE > /dev/null 2>&1
+    scp -C -i $SSH_INDENTITY $PDFILE musescore-nightlies@ftp-osl.osuosl.org:~/ftp/handbook/MuseScore-3.0/
     rm $PDFILE
     ((INDEX++))
 done
