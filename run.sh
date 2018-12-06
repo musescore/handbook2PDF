@@ -52,6 +52,7 @@ do
 done
 
 # MuseScore 3
+INDEX=0
 while [ "$INDEX" -lt "$LANGUAGE_COUNT" ]
 do
     LANGUAGE=${LANGUAGES[$INDEX]}
