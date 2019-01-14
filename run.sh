@@ -37,20 +37,6 @@ expect << EOF
 EOF
 SSH_INDENTITY=$HOME/.ssh/osuosl_nighlies_rsa
 
-# MuseScore 2
-while [ "$INDEX" -lt "$LANGUAGE_COUNT" ]
-do
-    LANGUAGE=${LANGUAGES[$INDEX]}
-    echo "update handbook 2 - [$LANGUAGE]"
-    PDFILE=MuseScore-${LANGUAGE}.pdf
-    TIME=$(date +%s)
-    #echo "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf&no-cache=${TIME}"
-    $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 2 handbook" cover https://musescore.org/${LANGUAGE}/handbook-cover toc --xsl-style-sheet custom.xslt "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID}?pdf=1&no-cache=${TIME}" $PDFILE > /dev/null 2>&1
-    scp -C -i $SSH_INDENTITY $PDFILE musescore-nightlies@ftp-osl.osuosl.org:~/ftp/handbook/MuseScore-2.0/
-    rm $PDFILE
-    ((INDEX++))
-done
-
 # MuseScore 3
 INDEX=0
 while [ "$INDEX" -lt "$LANGUAGE_COUNT" ]
