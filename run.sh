@@ -7,8 +7,7 @@ cd $ABSPATH
 
 WKHTML=./wkhtmltox/bin/wkhtmltopdf
 
-LANGUAGES=( en af de ar be bg ca cs da et el es eo fa eu fr gl ko sr hr id it he lt hu nl ja nb pl pt-br pt-pt ro ru sk sl fi sv vi tr uk zh-hans zh-hant )
-NID=36546
+LANGUAGES=( en af ar be bg ca cs da de et el es eo fa eu sq fo fr gl ko sr cy hi hr id it he lt hu nl ja nb pl pt_BR pt_PT ro ru sk sl fi sv th vi tr uk zh-Hans zh-Hant ig )
 NID3=278625
 
 LANGUAGE_COUNT=${#LANGUAGES[@]}
