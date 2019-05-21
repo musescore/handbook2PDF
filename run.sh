@@ -7,7 +7,7 @@ cd $ABSPATH
 
 WKHTML=./wkhtmltox/bin/wkhtmltopdf
 
-LANGUAGES=( en af ar be bg ca cs da de et el es eo fa eu sq fo fr gl ko sr cy hi hr id it he lt hu nl ja nb pl pt_BR pt_PT ro ru sk sl fi sv th vi tr uk zh-Hans zh-Hant ig )
+LANGUAGES=( en af ar be bg ca cs da de et el es eo fa eu sq fo fr gl ko sr cy hi hr id it he lt hu nl ja nb pl pt-br pt-pt ro ru sk sl fi sv th vi tr uk zh-hans zh-hant ig )
 NID3=278625
 
 LANGUAGE_COUNT=${#LANGUAGES[@]}
@@ -42,7 +42,13 @@ while [ "$INDEX" -lt "$LANGUAGE_COUNT" ]
 do
     LANGUAGE=${LANGUAGES[$INDEX]}
     echo "update handbook 3 - [$LANGUAGE]"
-    PDFILE=MuseScore-${LANGUAGE}.pdf
+    case ${LANGUAGE} in
+        pt-br)   PDFILE=MuseScore-pt_BR.pdf ;;
+        pt-pt)   PDFILE=MuseScore-pt.pdf ;;
+        zh-hant) PDFILE=MuseScore-zh_Hant.pdf ;;
+        zh-hans) PDFILE=MuseScore-zh_CN.pdf ;;
+        *) PDFILE=MuseScore-${LANGUAGE}.pdf ;;
+    esac
     TIME=$(date +%s)
     #echo "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID3}?pdf&no-cache=${TIME}"
     $WKHTML --footer-center '[page]' --footer-spacing 2 --title "MuseScore 3 handbook" cover https://musescore.org/${LANGUAGE}/handbook-cover toc --xsl-style-sheet custom.xslt "https://musescore.org/${LANGUAGE}/print/book/export/html/${NID3}?pdf=1&no-cache=${TIME}" $PDFILE > /dev/null 2>&1
